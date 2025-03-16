@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Javascript Mie scattering calculator</title>
+    <link rel="icon" type="image/png" href="ls.png" />
+    <script src="js/ComplexNumber.js" type="text/javascript"></script>
+    <script src="js/ComplexTrig.js" type="text/javascript"></script>
+    <script src="bhmie.js" type="text/javascript"></script>
+    <script src="js/interpolation.js" type="text/javascript"></script>
+    <script src="interface.js" type="text/javascript"></script>
+    <script src="matPalik.js" type="text/javascript"></script>
+    <script src="matJC.js" type="text/javascript"></script>
+    <script src="matOther.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div class="box">
+      <h2>Parameters</h2>
+      <form name="param">
+        <fieldset>
+          <legend>sphere</legend>
+          <p style="font-size: small; text-align: right">
+            &lambda;<sub>min</sub> :
+            <input type="text" id="lambdamin" size="3" value="200" /> nm,
+            &lambda;<sub>max</sub> :
+            <input type="text" id="lambdamax" size="3" value="1200" /> nm
+            <br />
+            Interpolation of the optical constants: none
+            <input type="radio" name="interpolate" value="off" />, linear<input
+              type="radio"
+              name="interpolate"
+              value="linear"
+            />
+            or
+            <a href="https://en.wikipedia.org/wiki/Monotone_cubic_interpolation"
+              >monotone cubic</a
+            >
+            <input
+              type="radio"
+              name="interpolate"
+              value="mci"
+              checked="checked"
+            />, step : <input type="text" id="pas" size="2" value="2" /> nm
+          </p>
+          <div id="tabdiv"></div>
+          <label for="d">diameter (between 0 and 1000 nm): d=</label>
+          <input type="text" id="d" size="4" value="50" />
+          <input type="range" id="slider-d" min="1" max="1000" value="50" />
+        </fieldset>
+        <fieldset>
+          <legend>embedding medium</legend>
+          <label for="n">refraction index (between 1 and 3): n=</label>
+          <input type="text" id="n" size="3" value="1.5" />
+          <input type="range" id="slider-n" min="100" max="300" value="150" />
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="box" id="inputbox">
+      <h2>User-defined material</h2>
+      <div style="float: left; clear: none">
+        <input type="file" id="file" name="file" />
+        <br />
+        <textarea id="input" cols="35" rows="15"></textarea>
+      </div>
+      <div style="float: left; clear: none; width: 20em">
+        <p>
+          The first three columns of each line are interpreted as the wavelength
+          in nanometer, n and k. Other columns and dubious lines are ignored.
+        </p>
+        <button type="button" id="inputbutton">Apply</button>
+        <fieldset>
+          <legend>options</legend>
+          <fieldset>
+            <legend>first column</legend>
+            <input type="radio" name="col1" value="nm" id="nm" checked />nm
+            <input type="radio" name="col1" value="nm" id="mum" />&mu;m
+            <input type="radio" name="col1" value="ang" id="ang" />&Aring;
+            <input type="radio" name="col1" value="eV" id="eV" />eV
+            <input type="radio" name="col1" value="cm" id="cm" />cm<sup>-1</sup>
+          </fieldset>
+          <br />
+          <input
+            type="checkbox"
+            name="clean"
+            value="clean"
+            id="clean"
+          />clean<br />
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Results</h2>
+      <canvas id="plot">
+        <p class="flash">
+          Your web browser doesn't support the <code>canvas</code> tag. You need
+          to use a more recent one such as Mozilla Firefox, Google Chrome,
+          Safari, Internet Explorer <em>version &ge; 9</em>, ...
+        </p>
+      </canvas>
+    </div>
+
+    <div class="box info">
+      <h2>Explanations</h2>
+      <p>
+        Extinction and scattering spectra can be calculated from this page using
+        the <a href="https://en.wikipedia.org/wiki/Mie_theory">Mie theory</a>.
+        The sphere dimension and composition and the
+        <a href="https://en.wikipedia.org/wiki/List_of_refractive_indices"
+          >refractive</a
+        >
+        index of the embedding medium can be chosen. Q<sub>ext</sub>, Q<sub
+          >abs</sub
+        >
+        and Q<sub>sca</sub> are calculated. They are the extinction, absorption
+        and scattering cross-sections divided by &pi;R<sup>2</sup> where R is
+        the radius of the sphere.
+      </p>
+
+      <p>
+        You can zoom the plot by selecting a rectangle and zoom out using the
+        lower left icon. The plot can also be resized using the lower right
+        icon. The calculated values are available when clicking the
+        <code>DAT</code> icon.
+      </p>
+
+      <p>
+        Some optical constants are pre-defined but you can enter your own ones.
+        For example, you can visit
+        <a href="https://refractiveindex.info/">refractiveindex.info</a>, choose
+        the material you are interested in and download the data by using the
+        &ldquo;Full database record&rdquo; link. Then click the
+        &ldquo;user-defined&rdquo; box above and paste the data. Finally select
+        the correct unit for the first column and click the &ldquo;Apply&rdquo;
+        button.
+      </p>
+    </div>
+  </body>
+</html>
