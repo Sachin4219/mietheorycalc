@@ -1,272 +1,131 @@
-/* 1. Create global variables for text and background color */
+/* 1. Define global variables for a soothing light theme */
 :root {
-  --color-text: black;
-  --color-background: white;
-  --color-shadow: #cccccc;
-  --color-background-lang: #f0fff0;
-  --color-background-select: #eeeeee;
+  --color-text: #222222; /* Dark gray for readability */
+  --color-background: #f5faff; /* Soft light blue */
+  --color-shadow: #d0d7e0; /* Light gray shadow */
+  --color-accent: #a8c7e0; /* Muted blue for highlights */
+  --color-box-background: #ffffff; /* White boxes */
+  --color-border: #b0c4de; /* Subtle border color */
 }
 
-/* 2. Add conditional styling for dark mode preference */
-@media (prefers-color-scheme: dark) {
-  /* Re-assign previous variables */
+/* 2. Dark mode preference styling */
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --color-text: white; /* black => white */
-    --color-background: black; /* white => black */
-    --color-shadow: #444444;
-    --color-background-lang: #888888;
-    --color-background-select: #444444;
+    --color-text: #e0e0e0;
+    --color-background: #1c1f26;
+    --color-shadow: #444;
+    --color-accent: #5078a0;
+    --color-box-background: #2b2f36;
+    --color-border: #3a4d66;
   }
-  :link {
-    color: red;
-  }
-}
+} */
 
-/* 3. Assign variables to page color and background */
+/* 3. General styling */
 body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
   color: var(--color-text);
   background-color: var(--color-background);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media only screen and (min-width: 860px) {
-  body {
-    padding-left: calc(50% - 430px);
-  }
-  .box,
-  .pub,
-  body > p {
-    width: 850px;
-  }
-  .cmd {
-    width: unset;
-  }
-}
-body {
-  font-family: sans-serif;
-  font-size: 85%;
-}
 p {
   text-align: justify;
 }
-a[href^="http"]:not([href*="https://saviot.cnrs.fr"])::after
-{
-  content: ""
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAVklEQVR4Xn3PgQkAMQhDUXfqTu7kTtkpd5RA8AInfArtQ2iRXFWT2QedAfttj2FsPIOE1eCOlEuoWWjgzYaB/IkeGOrxXhqB+uA9Bfcm0lAZuh+YIeAD+cAqSz4kCMUAAAAASUVORK5CYII=);
+
+a {
+  color: var(--color-accent);
   text-decoration: none;
 }
-/*
-  a[href^="#"]::after {
-    content: ""
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATElEQVQY08WOwQ2AQBACZ21Ja9qraa0Ja8KX5mLinT95kQBh4DfF7VLug8qVtkUM1yWblEm5ZE/vrkHJXr4yvhcfzAyLHeP0uu0HACcJlSPrF6JXmAAAAABJRU5ErkJggg==);
-  }
-  */
-#language {
-  border: 1px solid #a0dda0;
-  background-color: var(--color-background-lang);
-  border-radius: 0.5em 0.5em 0 0;
-  box-shadow: 0.5em 0.25em 0.25em var(--color-shadow);
-  clear: both;
-  float: right;
-  margin: 1px;
-  padding: 1px;
-  text-align: right;
-}
-#language * {
-  display: inline;
-  padding: 0;
-  text-decoration: none;
-}
-/*
-  div {
-    background: rgb(255,255,255);
-    background: rgba(255,255,255,0.9);
-  }
-  */
-.nobox {
-  clear: left;
-  float: left;
-}
-.box {
-  border: 1px solid #a0a0dd;
-  border-radius: 0 1.5em 0 0/0 1em 0 0;
-  box-shadow: 0.5em 0.25em 0.25em var(--color-shadow);
-  clear: left;
-  float: left;
-  margin: 0 1em 0.5em 0;
-  overflow: hidden;
-  padding-top: 0;
-}
-.box > h2 ~ * {
-  margin-left: 0.75em;
-  margin-right: 0.75em;
-}
-h3 {
-  font-size: 1em;
-}
-.box th {
-  background-color: #e8e8ff;
-}
-.box > h2 {
-  background: #b0b0ee;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin: 0;
-  padding: 0.5em 0.5em 0 1em;
-}
-.imgtext {
-  bottom: 0.5em;
-  overflow: hidden;
-  position: absolute;
-  right: 0.5em;
-}
-fieldset {
-  display: inline-block;
-}
-input,
-select,
-table {
-  font-size: 1em;
-}
-td input {
-  vertical-align: middle;
-}
-input:disabled + label {
-  opacity: 0.25;
-}
-/*
-  input[type=text] {
-      text-overflow: ellipsis;
-  }
-  */
-table {
-  border-left: #000000 solid 1px;
-  border-top: #000000 solid 1px;
-  margin-left: auto;
-  margin-right: auto;
-}
-th,
-td {
-  border-bottom: #dddddd solid 1px;
-  border-right: #dddddd solid 1px;
-  font-family: serif;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  padding: 0.25em;
-  text-align: center;
-}
-td:not([colspan]):hover {
-  background: #e0e0e0;
-}
-.fit th,
-.fit td {
-  padding: 0.25em;
-}
-strong {
-  color: red;
-  font-weight: bold;
-}
-fieldset {
-  background-color: var(--color-background-select);
-  border-radius: 0.5em;
-  padding: 0.25em;
-}
-legend {
-  margin-left: 5em;
-}
-.info th {
-  background-color: #d0ffd0;
-}
-th {
-  color: #555;
-}
-.info {
-  border: 1px solid #a0dda0;
-}
-.info > h2 {
-  background: #a0dda0;
-}
-.alert th {
-  background-color: #ffd0d0;
-}
-.alert {
-  border: 1px solid #dda0a0;
-}
-.alert > h2 {
-  background: #dda0a0;
-}
-em {
+
+a:hover {
   text-decoration: underline;
 }
-.play {
-  border-bottom: 8px solid transparent;
-  border-left: 12px solid #888888;
-  border-top: 8px solid transparent;
-  height: 0;
-  width: 0;
+
+/* 4. Layout Components */
+.box {
+  width: fit-content;
+  padding: 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-box-background);
+  box-shadow: 3px 3px 10px var(--color-shadow);
+  padding: 16px;
+  margin-bottom: 16px;
 }
-.pause {
-  border-left: 4px solid #888888;
-  border-right: 4px solid #888888;
-  height: 16px;
-  width: 4px;
-}
-.bar {
-  border-left: 3px solid #000000;
-  display: inline-block;
-  height: 12px;
-  vertical-align: middle;
-  width: 0;
-}
-.next {
-  border-bottom: 6px solid transparent;
-  border-left: 9px solid #000000;
-  border-top: 6px solid transparent;
-  display: inline-block;
-  height: 0;
-  vertical-align: middle;
-  width: 0;
-}
-.previous {
-  border-bottom: 6px solid transparent;
-  border-right: 9px solid #000000;
-  border-top: 6px solid transparent;
-  display: inline-block;
-  height: 0;
-  margin: 0;
-  vertical-align: middle;
-  width: 0;
-}
-.nowrap {
-  margin-left: 3px;
-  margin-right: 3px;
-  white-space: nowrap;
-}
-dl {
-  padding: 0.5em;
-}
-dt {
-  float: left;
-  clear: both;
-  width: 8em;
-  text-align: center;
+
+.box > h2 {
+  background: var(--color-accent);
+  color: white;
+  font-size: 1.2em;
   font-weight: bold;
-  background-color: #ddd;
-  border-radius: 0.5em 0 0.5em 0;
+  padding: 12px;
+  margin: 0;
+  border-radius: 8px 8px 0 0;
 }
-dd {
-  margin: 0 0 0 9em;
-  padding: 0 0 0.5em 0;
-  text-align: justify;
+
+/* 5. Tables & Forms */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-box-background);
 }
-span[onclick] {
-  background-color: #ddf;
+
+th,
+td {
+  border: 1px solid var(--color-border);
+  padding: 12px;
+  text-align: center;
 }
-div.cols {
-  display: table;
-  border-spacing: 5px;
+
+th {
+  background: var(--color-accent);
+  color: white;
 }
-div.col {
-  display: table-cell;
-  vertical-align: top;
+
+td:hover {
+  background: var(--color-shadow);
+}
+
+/* 6. Buttons */
+button,
+input[type="submit"] {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: darken(var(--color-accent), 10%);
+}
+
+/* 7. Additional Elements */
+fieldset {
+  background: var(--color-box-background);
+  border: 1px solid var(--color-border);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+legend {
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+/* 8. Responsive Design */
+@media (max-width: 600px) {
+  .box {
+    padding: 12px;
+  }
+  th,
+  td {
+    padding: 8px;
+  }
 }
